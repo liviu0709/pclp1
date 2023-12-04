@@ -1,0 +1,32 @@
+Task 1:
+Pentru implentarea functiei de flip horizontal, definim mai intai o functie pentru interschimbarea pixelilor. 
+Apoi o folosim pe aceasta pentru a inversa fiecare linie de pixeli (primul cu ultimul, al doilea cu penultimul etc).
+
+Task 2:
+Dimensiunile pozei se schimba intre ele. Astfel, trb sa definim o functie pentru a aloca memorie pt o alta imagine.
+Dupa ce alocam memorie pentru poza rotita, punem in aceasta elementele. Se observa ca poza este rotita, dar in oglinda.
+Pentru rezolvarea acestui fapt, am folosit functia de flip orizontal.
+Pentru a rezolva memory leakurile care ar aparea pe valgrind, definim o functie pentru eliberarea memoriei.
+
+Task 3:
+Dimensiunile imaginii se schimba, deci folosim functia de alocare definita mai sus. 
+In continuare, parcurgem fiecare pixel care trebuia inclus in noua imagine si il punem in imaginea noua.
+Pentru a rezolva memory leakurile care ar aparea pe valgrind, folosim functia de eliberare a memoriei definita mai sus.
+
+Task 4:
+Pentru a rezolva acest task, am folosit functia de flip orizontal definita mai sus.
+In continuare, parcurgem imaginea primita pentru a copia pixelii in imaginea noua.
+Umplem pixelii ramasi cu culoarea primita ca parametru.
+Pentru a rezolva memory leakurile care ar aparea pe valgrind, folosim functia de eliberare a memoriei definita mai sus.
+
+Task 5:
+Luam pe rand fiecare pixel care trb modificat din imaginea destinatie si ii atribuim valoarea pixelului corespunzator din imaginea sursa.
+Daca se ajunge la marginea imaginii destinatie, ne oprim.
+
+Task 6:
+Luam pe rand fiecare pixel din imagine si ii aplicam filtrul dat. Daca se ajunge la marginea imaginii, in calculul pixelilor, ignoram pixelii din afara.
+In final, verificam ca valoarea culorilor sa fie intre 0 si 255. Daca nu este, o modificam.
+
+Task 7:
+Pentru a rezolva acest task, folosim toate functiile definite la taskurile anterioare. 
+Ca idee de rezolvare, folosim un switch pentru fiecare caz in care trebuie aplicata o functie.
