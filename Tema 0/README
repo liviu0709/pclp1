@@ -1,0 +1,9 @@
+Descriere rezolvare task1:
+    Citim numerele date de la tastatura
+    Afisam suma lor, respectiv produsul lor
+
+Descriere rezolvare task2:
+    Citim numarul N de la tastatura
+    Parcurgem toate numerele naturale de la 1 la N folosind o structura repetitiva:
+        Verifica pentru fiecare numar in parte divizibilitatea cu 7 si 11
+        Afisam ceea ce este cazul( Treat, Trick, TrickOrTreat sau numarul in sine )
