@@ -59,7 +59,7 @@ int main() {
     static int R, G, B, rows, cols, src;
     struct filter *filtre = calloc( nr_max_imag_loaded, sizeof(struct filter) );
     struct imag_data *imagini = calloc( nr_max_imag_loaded, sizeof(struct imag_data) );
-    char cmd[max_nr_chars], path[max_nr_chars];
+    char* cmd = calloc(max_nr_chars, sizeof(char)), *path = calloc(max_nr_chars, sizeof(char));
     while ( !exit ) {
         scanf("%s", cmd);
         int indice_comanda = 0;
@@ -177,5 +177,8 @@ int main() {
             dezalocare(imagini[i].image, imagini[i].N, imagini[i].M);
     }
     free(imagini);
+    // Dezaocam memoria pentru cmd si path
+    free(cmd);
+    free(path);
     return 0;
 }
