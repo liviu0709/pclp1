@@ -57,8 +57,8 @@ int main() {
     static int exit, nr_imagini, index, x, y, w, h;
     static int nr_filtre, index_filtre, size, n, m;
     static int R, G, B, rows, cols, src;
-    struct filter *filtre = calloc( nr_max_imag_loaded, sizeof(struct filter) );
-    struct imag_data *imagini = calloc( nr_max_imag_loaded, sizeof(struct imag_data) );
+    struct filter *filtre = calloc(nr_max_imag_loaded, sizeof(struct filter));
+    struct imag_data *imagini = calloc(nr_max_imag_loaded, sizeof(struct imag_data));
     char* cmd = calloc(max_nr_chars, sizeof(char)), *path = calloc(max_nr_chars, sizeof(char));
     while ( !exit ) {
         scanf("%s", cmd);
