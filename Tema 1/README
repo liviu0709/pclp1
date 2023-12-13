@@ -14,7 +14,7 @@ In continuare, parcurgem fiecare pixel care trebuia inclus in noua imagine si il
 Pentru a rezolva memory leakurile care ar aparea pe valgrind, folosim functia de eliberare a memoriei definita mai sus.
 
 Task 4:
-Pentru a rezolva acest task, am folosit functia de flip orizontal definita mai sus.
+Dimensiunile imaginii se schimba, deci folosim functia de alocare definita mai sus.
 In continuare, parcurgem imaginea primita pentru a copia pixelii in imaginea noua.
 Umplem pixelii ramasi cu culoarea primita ca parametru.
 Pentru a rezolva memory leakurile care ar aparea pe valgrind, folosim functia de eliberare a memoriei definita mai sus.
@@ -24,9 +24,14 @@ Luam pe rand fiecare pixel care trb modificat din imaginea destinatie si ii atri
 Daca se ajunge la marginea imaginii destinatie, ne oprim.
 
 Task 6:
+Avand in vedere ca nu se poate lucra pe aceeasi imagine, deoarece modificarea unui pixel ar afecta si urmatoarea modificare, alocam memorie pentru o noua imagine.
 Luam pe rand fiecare pixel din imagine si ii aplicam filtrul dat. Daca se ajunge la marginea imaginii, in calculul pixelilor, ignoram pixelii din afara.
-In final, verificam ca valoarea culorilor sa fie intre 0 si 255. Daca nu este, o modificam.
+Verificam ca valoarea culorilor sa fie intre 0 si 255. Daca nu este, o modificam.
+Ultimul pas este sa eliberam memoria alocata pentru imaginea initiala si sa returnam imaginea modificata.
 
 Task 7:
 Pentru a rezolva acest task, folosim toate functiile definite la taskurile anterioare. 
 Ca idee de rezolvare, folosim un switch pentru fiecare caz in care trebuie aplicata o functie.
+In plus, vom folosi vectori de imagini si filtre alocate dinamic pentru a salva imaginile si filtrele. 
+Acestea vor functiona ca un fel de stiva, astfel incat sa putem reveni la o imagine anterioara.
+Pentru a rezolva memory leakurile care ar aparea pe valgrind, folosim functia de dezalocare definita mai sus si eliberam toata memoria folosita.
