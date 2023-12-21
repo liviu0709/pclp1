@@ -1,0 +1,31 @@
+1. Se da un fisier ce contine doua siruri de numere intregi, ambele sortate. Sa se creeze fisierul data.out ce contine valorile interclasate din cele doua siruri. Pe prima linie se afiseaza numarul de elemente ale sirului interclasat, iar pe a doua linie se afiseaza sirul dupa interclasare.
+data.in
+4
+-1 2 10 15
+3
+1 1 7
+data.out
+7
+-1 1 1 2 7 10 15
+2. Se da un fisier text si doua cuvinte cuv1 si cuv2. Inlocuiti toate aparitiile cuvantului cuv1  cu cuvantul cuv2. cuv1 si cuv2 pot contine doar caractere alfanumerice (fara spatii sau newline). Textul poate contine orice caracter valid si se poate extinde pe mai multe linii.
+data.in	data.out
+mere	Ana are pere si pere (multe pere).
+pere	Cate pere ai?
+Ana are mere si pere (multe mere).	<newline>
+Cate mere ai?
+aa	a a a a bbb bbba bbabb
+bbb
+a a a a aa aaa bbabb
+3. Sa se elimine dintr-un fisier toate spatiile, taburile, si liniile vide consecutive. Rezultatul se va scrie intr-un nou fisier numit “data.out”. Fisierul de intrare va ramane nemodificat.
+data.in	data.out
+Ana are    mere. Da.	Anaaremere.Da.
+Faraliniivideconsecutive.
+Fara linii vide consecutive.	Ultimaliniecutab-uri.
+Ultima            linie cu tab-uri.
+4. Avem 2 fisiere text (data1.in si data2.in). Se doreste adaugarea continutului celui de-al doilea fisier la sfarsitul primului (concatenarea fisierelor) si salvarea intr-un al treilea fisier (data.out). Fisierele de intrare vor ramane nemodificate.
+data1.in	data2.in	data.out
+Acesta este primul	Acesta	Acesta este primul
+fisier.	este	fisier.
+Acesta
+al doilea	este
+fisier!
