@@ -2,6 +2,12 @@ CFLAGS=-Wall -Werror
 
 .PHONY: clean run-bitpacking run-planner
 
+main: main.c timelib.c
+	gcc main.c timelib.c $(CFLAGS) -o main
+
+run-main: main
+	./main
+
 run-bitpacking: bitpacking
 	./bitpacking
 
