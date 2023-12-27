@@ -161,6 +161,12 @@ void task8() {
     for ( int i = 0 ; i < nr_date_corecte ; i++ ) {
         printf("%d.%d.%d\n", dt[i].day, dt[i].month, dt[i].year);
     }
+    // Eliberam memoria
+    free(v);
+    free(v_control);
+    free(corupt_date);
+    free(corupt_int);
+    free(dt);
 }
 
 int main()
