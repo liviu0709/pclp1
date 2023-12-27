@@ -66,6 +66,8 @@ void task7() {
     for ( int i = 0 ; i < n ; i++ ) {
         printf("%d %s %d\n", dt[i].day, luni[dt[i].month - 1], dt[i].year);
     }
+    // Eliberam memoria
+    free(dt);
 }
 
 void task8() {
