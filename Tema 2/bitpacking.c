@@ -70,8 +70,97 @@ void task7() {
     free(dt);
 }
 
+int get_bit(unsigned int *v, int bit) {
+    // Calculam pozitia bitului in vectorul de int-uri
+    int poz = bit / 32;
+    // Calculam pozitia bitului in interiorul int-ului
+    int poz_bit = bit % 32;
+    // Shiftam bitii la dreapta cu poz_bit pozitii
+    unsigned int aux = v[poz] >> poz_bit;
+    // Returnam bitul
+    return aux & 1;
+}
+
 void task8() {
-    // TODO Task 8
+    int nr_date, nr_int, nr_int_control, nr_biti_date;
+    scanf("%d", &nr_date);
+    // Calculam numarul de int-uri necesare pentru date
+    if ( nr_date % 32 == 0 ) {
+        nr_int = nr_date * 15 / 32;
+    } else {
+        nr_int = nr_date * 15 / 32 + 1;
+    }
+    // Calculam numarul de int-uri necesare pentru bitii de control
+    if ( nr_int % 32 == 0 ) {
+        nr_int_control = nr_int / 32;
+    } else {
+        nr_int_control = nr_int / 32 + 1;
+    }
+    // Calculam nr de biti total de date
+    nr_biti_date = nr_date * 15;
+    unsigned int *v = (unsigned int *)malloc(nr_int * sizeof(unsigned int));
+    // Citim int urile cu date
+    for ( int i = 0 ; i < nr_int ; i++ ) {
+        scanf("%u", &v[i]);
+    }
+    unsigned int *v_control = (unsigned int *)malloc(nr_int_control * sizeof(unsigned int));
+    // Citim int urile de control
+    for ( int i = 0 ; i < nr_int_control ; i++ )
+        scanf("%u", &v_control[i]);
+    int *corupt_date = calloc(nr_date, sizeof(int));
+    int *corupt_int = calloc(nr_int, sizeof(int));
+    // Verificam fiecare bit de control
+    for ( int i = 0 ; i < nr_int ; i++ ) {
+        int nr_biti_1 = 0;
+        for ( int j = 0 ; j < 32 ; j++ ) {
+            if ( get_bit(v, i * 32 + j) == 1 )
+                nr_biti_1++;
+        }
+        if ( nr_biti_1 % get_bit(v_control, i) == 1 )
+            corupt_int[i] = 1;
+    }
+    // Stiind care sunt int-urile corupte, aflam datele corupte
+    for ( int i = 0 ; i < nr_biti_date ; i++ ) {
+        if ( corupt_int[i / 32] == 1 ) {
+            corupt_date[i / 15] = 1;
+        }
+    }
+    // Extragem toate datele
+    TDate *dt = (TDate *)malloc(nr_date * sizeof(TDate));
+    for ( int i = 0 ; i < nr_date ; i++ ) {
+        int ziua = 0;
+        for ( int j = 0 ; j < 5 ; j++ ) {
+            if ( get_bit(v, i * 15 + j) == 1 )
+                ziua += (1 << j);
+        }
+        dt[i].day = ziua;
+        int luna = 0;
+        for ( int j = 0 ; j < 4 ; j++ ) {
+            if ( get_bit(v, i * 15 + 5 + j) == 1 )
+                luna += (1 << j);
+        }
+        dt[i].month = luna;
+        int an = 0;
+        for ( int j = 0 ; j < 6 ; j++ ) {
+            if ( get_bit(v, i * 15 + 9 + j) == 1 )
+                an += (1 << j);
+        }
+        dt[i].year = 1970 + an;
+    }
+    // Stergem datele corupte din dt
+    int nr_date_corecte = 0;
+    for ( int i = 0 ; i < nr_date ; i++ ) {
+        if ( corupt_date[i] == 0 ) {
+            dt[nr_date_corecte] = dt[i];
+            nr_date_corecte++;
+        }
+    }
+    // Sortam datele
+    qsort(dt, nr_date_corecte, sizeof(TDate), compara);
+    // Afisam datele
+    for ( int i = 0 ; i < nr_date_corecte ; i++ ) {
+        printf("%d.%d.%d\n", dt[i].day, dt[i].month, dt[i].year);
+    }
 }
 
 int main()
