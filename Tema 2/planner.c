@@ -175,5 +175,13 @@ int main()
             printDateTimeTZ(convertUnixTimestampToDateTimeTZ(pers[i].data[j], fus_orar, get_timezone_index(fus_orar, pers[i].tz, T)));
     }
     */
+    // Task 10
+    // Eliberam memoria
+    free(fus_orar);
+    for ( int i = 0 ; i < nr_Pers ; i++ ) {
+        free(pers[i].data);
+        free(pers[i].lung_interval);
+    }
+    free(pers);
     return 0;
 }
