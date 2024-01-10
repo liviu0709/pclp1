@@ -159,6 +159,7 @@ void task8() {
     qsort(dt, nr_date_corecte, sizeof(TDate), compara);
     // Afisam datele
     for ( int i = 0 ; i < nr_date_corecte ; i++ ) {
+        // Prob este formatul gresit!!!!!!
         printf("%d.%d.%d\n", dt[i].day, dt[i].month, dt[i].year);
     }
     // Eliberam memoria

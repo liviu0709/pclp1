@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "timelib.h"
 
 // TODO Task 1
@@ -202,7 +203,7 @@ unsigned int convertDateTimeTZToUnixTimestamp(TDateTimeTZ datetimetz) {
 
 	sol += ((datetimetz).date.day - 1) * 24 * 3600;
 
-	sol -= (datetimetz).tz->utc_hour_difference * 3600;
+	sol -= ((int)(datetimetz).tz->utc_hour_difference) * 3600;
 
 	return sol;
 }
