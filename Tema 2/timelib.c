@@ -214,7 +214,10 @@ void printDateTimeTZ(TDateTimeTZ datetimetz) {
 	char *luni[12] = {"ianuarie", "februarie", "martie", "aprilie", "mai", "iunie",
 		"iulie", "august", "septembrie", "octombrie", "noiembrie", "decembrie"};
 	printf("%d %s %d, ", datetimetz.date.day, luni[datetimetz.date.month - 1], datetimetz.date.year);
-	printf("%d:%d:%d ", datetimetz.time.hour, datetimetz.time.min, datetimetz.time.sec);
+	printf("%d:%d:", datetimetz.time.hour, datetimetz.time.min);
+	if ( datetimetz.time.sec < 10 )
+		printf("0");
+	printf("%d ", datetimetz.time.sec);
 	printf("%s (UTC", datetimetz.tz->name);
 	if ( datetimetz.tz->utc_hour_difference >= 0 )
 		printf("+");

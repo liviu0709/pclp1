@@ -55,7 +55,7 @@ void task7() {
             v >>= 1;
         }
         dt[i].year = 1970 + an;
-        printf("%02d.%02d.%04d\n", dt[i].day, dt[i].month, dt[i].year);
+        // printf("%02d.%02d.%04d\n", dt[i].day, dt[i].month, dt[i].year);
     }
     // Acum, vectorul trebuie sortat
     qsort(dt, n, sizeof(TDate), compara);
@@ -116,13 +116,14 @@ void task8() {
             if ( get_bit(v, i * 32 + j) == 1 )
                 nr_biti_1++;
         }
-        if ( nr_biti_1 % get_bit(v_control, i) == 1 )
+        if ( nr_biti_1 % 2 != get_bit(v_control, i) )
             corupt_int[i] = 1;
     }
     // Stiind care sunt int-urile corupte, aflam datele corupte
     for ( int i = 0 ; i < nr_biti_date ; i++ ) {
         if ( corupt_int[i / 32] == 1 ) {
             corupt_date[i / 15] = 1;
+            // printf("corupt %d\n", i / 15);
         }
     }
     // Extragem toate datele
@@ -134,18 +135,21 @@ void task8() {
                 ziua += (1 << j);
         }
         dt[i].day = ziua;
+        //printf("%d:", ziua);
         int luna = 0;
         for ( int j = 0 ; j < 4 ; j++ ) {
             if ( get_bit(v, i * 15 + 5 + j) == 1 )
                 luna += (1 << j);
         }
         dt[i].month = luna;
+        //printf("%d:", luna);
         int an = 0;
         for ( int j = 0 ; j < 6 ; j++ ) {
             if ( get_bit(v, i * 15 + 9 + j) == 1 )
                 an += (1 << j);
         }
         dt[i].year = 1970 + an;
+        //printf("%d\n", an + 1970);
     }
     // Stergem datele corupte din dt
     int nr_date_corecte = 0;
@@ -157,10 +161,12 @@ void task8() {
     }
     // Sortam datele
     qsort(dt, nr_date_corecte, sizeof(TDate), compara);
+    // Pentru afisare avem nevoie de luni
+    char *luni[12] = {"ianuarie", "februarie", "martie", "aprilie", "mai", "iunie",
+	"iulie", "august", "septembrie", "octombrie", "noiembrie", "decembrie"};
     // Afisam datele
     for ( int i = 0 ; i < nr_date_corecte ; i++ ) {
-        // Prob este formatul gresit!!!!!!
-        printf("%d.%d.%d\n", dt[i].day, dt[i].month, dt[i].year);
+        printf("%d %s %d\n", dt[i].day, luni[dt[i].month - 1], dt[i].year);
     }
     // Eliberam memoria
     free(v);
