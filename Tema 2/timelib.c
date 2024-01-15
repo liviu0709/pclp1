@@ -213,8 +213,15 @@ void printDateTimeTZ(TDateTimeTZ datetimetz) {
 	// [data] [luna (cuvânt)] [anul], [ora]:[minutul]:[secunda] [timezone name] (UTC[+/-][timezone utc hour diff])
 	char *luni[12] = {"ianuarie", "februarie", "martie", "aprilie", "mai", "iunie",
 		"iulie", "august", "septembrie", "octombrie", "noiembrie", "decembrie"};
+	if ( datetimetz.date.day < 10 )
+		printf("0");
 	printf("%d %s %d, ", datetimetz.date.day, luni[datetimetz.date.month - 1], datetimetz.date.year);
-	printf("%d:%d:", datetimetz.time.hour, datetimetz.time.min);
+	if ( datetimetz.time.hour < 10 )
+		printf("0");
+	printf("%d:", datetimetz.time.hour);
+	if ( datetimetz.time.min < 10 )
+		printf("0");
+	printf("%d:", datetimetz.time.min);	
 	if ( datetimetz.time.sec < 10 )
 		printf("0");
 	printf("%d ", datetimetz.time.sec);
