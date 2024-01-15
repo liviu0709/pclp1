@@ -14,7 +14,7 @@ typedef struct {
 } TDate;
 
 typedef struct {
-    char name[5];
+    char name[4 + 1];
     signed char utc_hour_difference;
 } TTimezone;
 
