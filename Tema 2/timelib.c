@@ -44,7 +44,7 @@ TDate convertUnixTimestampToDateWithoutLeapYears(unsigned int timestamp) {
 		result.month = 5;
 	// Ian + Febr + Mar + Apr + Mai + Iun
 	} else if ( timestamp < secunde_31_zile * 3 + secunde_februarie_nebisect + secunde_30_zile * 2 ) {
-		timestamp_zile = timestamp - secunde_31_zile * 3 - secunde_februarie_nebisect - secunde_30_zile * 2;
+		timestamp_zile = timestamp - secunde_31_zile * 3 - secunde_februarie_nebisect - secunde_30_zile;
 		result.month = 6;
 	// Ian + Febr + Mar + Apr + Mai + Iun + Iul (31d)
 	} else if ( timestamp < secunde_31_zile * 4 + secunde_februarie_nebisect + secunde_30_zile * 2 ) {
@@ -132,7 +132,7 @@ TDate convertUnixTimestampToDate(unsigned int timestamp) {
 		result.month = 5;
 	// Ian + Febr + Mar + Apr + Mai + Iun
 	} else if ( timestamp < secunde_31_zile * 3 + secunde_februarie_an_curent+ secunde_30_zile * 2 ) {
-		timestamp_zile = timestamp - secunde_31_zile * 3 - secunde_februarie_an_curent - secunde_30_zile * 2;
+		timestamp_zile = timestamp - secunde_31_zile * 3 - secunde_februarie_an_curent - secunde_30_zile;
 		result.month = 6;
 	// Ian + Febr + Mar + Apr + Mai + Iun + Iul (31d)
 	} else if ( timestamp < secunde_31_zile * 4 + secunde_februarie_an_curent + secunde_30_zile * 2 ) {
