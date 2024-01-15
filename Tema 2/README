@@ -1,0 +1,35 @@
+Task 1
+Calculam secundele, minutele si ora folosindu-ne de restul impartirii timestamp ului la nr de sec, min, ore din min, ora, zi
+
+Task 2
+Impartim timestamp ul la nr de sec dintr-un an pentru a det. anul curent (dupa ce adaugam 1970). Diferenta reprez. nr. de secunde din anul curent.
+Luam fiecare caz, afland luna curenta si nr de sec trecute din luna respectiva.
+In final, impartim la nr de sec dintr-o zi pentru a afla ziua curenta.
+
+Task 3
+Se procedeaza foarte similar cu task ul 2, doar ca tinem cont de anii bisecti.
+
+Task 4
+Folosind functiile definite anterior, este foarte simplu.
+
+Task 5
+Adaugam la timestamp nr de sec trecute in functie de an, luna, zi, ora, min, sec si fus orar. Se tine cont de anii bisecti.
+
+Task 6
+Afisam in formatul cerut, tinand cont ca ziua, ora, minutul si secunda trebuie sa aiba 2 cifre.
+
+Task 7
+Extragem ziua, luna si anul din fiecare int si le sortam.
+
+Task 8
+Ideea de rezolvare este aceeasi ca la task ul 7, doar ca tinem cont de mai multe lucruri. De exemplu, intr-un unsigned int incap 3 date,
+deci trebuie sa determinam numarul de int uri citite. La fel trebuie calculat si numarul de int uri de control.
+Verificam daca int urile au fost corupte. Fiecare data continuta intr un int corupt este ignorata.
+Extrag datele (inclusiv cele corupte) si stergem datele corupte. In final, sortam datele si le afisam.
+
+Task 9
+Rezolvarea acestui task este foarte simpla daca folosim functiile definite anterior. Citim datele si le prelucram.
+Metoda de rezolvare aleasa cere unificarea intervalelor de timp. Definim o functie care unifica intervalele de timp.
+Determinam intervalul de timp cel mai vechi si cel mai nou. Parcurgem fiecare interval de timp de la cel mai vechi la cel mai nou din ora in ora.
+Daca determinam un interval cand numarul minim de persoane care trebuie sa participe este atins. Ne oprim.
+Afisam solutia gasita (daca exista)
