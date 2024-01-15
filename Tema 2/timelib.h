@@ -14,7 +14,9 @@ typedef struct {
 } TDate;
 
 typedef struct {
-    char name[4 + 1];
+    // "numele timezone-ului (un string de maxim 4 caractere)"
+    // Pacat ca in checker e si "GMT+1" ca nume...
+    char name[4 + 2];
     signed char utc_hour_difference;
 } TTimezone;
 

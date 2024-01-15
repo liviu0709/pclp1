@@ -20,6 +20,7 @@ TTime convertUnixTimestampToTime(unsigned int timestamp) {
 // Task 2
 TDate convertUnixTimestampToDateWithoutLeapYears(unsigned int timestamp) {
     TDate result;
+    // Definim niste variabile utile pentru urm calcule
     unsigned int secunde_in_an = zile_in_an_nebisect * ore_in_zi * sec_in_ora;
     unsigned int secunde_in_zi = ore_in_zi * sec_in_ora;
     unsigned int secunde_30_zile = treizeci * ore_in_zi * sec_in_ora;
@@ -28,6 +29,8 @@ TDate convertUnixTimestampToDateWithoutLeapYears(unsigned int timestamp) {
     result.year = timestamp / secunde_in_an + an_inceput;
     timestamp = timestamp % secunde_in_an;
     unsigned int timestamp_zile = timestamp;
+    // Folosim 12 if uri pentru determinarea lunii curente a anului
+    // In functie de luna determinata, aflam cate secunde au trecut din luna respectiva
     // Ian
     if ( timestamp < secunde_31_zile ) {
         result.month = unu;
@@ -79,6 +82,7 @@ TDate convertUnixTimestampToDateWithoutLeapYears(unsigned int timestamp) {
         result.month = 0;
         printf("Ceva nu e bine\n");
     }
+    // Aflam ziua curenta a lunii, impartind la secunde_in_zi
     result.day = timestamp_zile / secunde_in_zi + 1;
     return result;
 }
@@ -86,6 +90,7 @@ TDate convertUnixTimestampToDateWithoutLeapYears(unsigned int timestamp) {
 // Task 3
 TDate convertUnixTimestampToDate(unsigned int timestamp) {
     TDate result;
+    // Definim niste variabile utile pentru urm calcule
     result.year = an_inceput;
     int secunde_in_an_nebisect = zile_in_an_nebisect * ore_in_zi * sec_in_ora;
     int secunde_in_an_bisect = (zile_in_an_nebisect + 1) * ore_in_zi * sec_in_ora;
@@ -93,6 +98,7 @@ TDate convertUnixTimestampToDate(unsigned int timestamp) {
     int secunde_30_zile = treizeci * ore_in_zi * sec_in_ora;
     int secunde_31_zile = treizeci_unu * ore_in_zi * sec_in_ora;
     int timestamp_an_curent = 0;
+    // Aflam anul curent
     while ( timestamp_an_curent <= timestamp ) {
         if ( (result.year % 4 == 0 && result.year % o_suta != 0) || result.year % patru_sute == 0 ) {
             if ( timestamp_an_curent + secunde_in_an_bisect > timestamp )
@@ -107,6 +113,7 @@ TDate convertUnixTimestampToDate(unsigned int timestamp) {
     }
     timestamp -= timestamp_an_curent;
     static unsigned int secunde_februarie_an_curent;
+    // Verificam daca anul curent este bisect sau nu
     if ( (result.year % 4 == 0 && result.year % o_suta != 0) || result.year % patru_sute == 0)
         secunde_februarie_an_curent = (treizeci - 1) * ore_in_zi * sec_in_ora;
     else
@@ -173,6 +180,7 @@ TDate convertUnixTimestampToDate(unsigned int timestamp) {
 // Task 4
 TDateTimeTZ convertUnixTimestampToDateTimeTZ(unsigned int timestamp, TTimezone *timezones, int timezone_index) {
     TDateTimeTZ result;
+    // Ne folosim de functiile definite anterior
     result.time = convertUnixTimestampToTime(timestamp + timezones[timezone_index].utc_hour_difference * sec_in_ora);
     result.date = convertUnixTimestampToDate(timestamp + timezones[timezone_index].utc_hour_difference * sec_in_ora);
     result.tz = &timezones[timezone_index];
@@ -189,25 +197,29 @@ unsigned int convertDateTimeTZToUnixTimestamp(TDateTimeTZ datetimetz) {
     sol += (datetimetz).time.sec;
     sol += (datetimetz).time.min * saizeci;
     sol += (datetimetz).time.hour * sec_in_ora;
-
+    // Calculam cate secunde au trecut din anul 1970 pana la anul curent
     for ( int i = an_inceput ; i < (datetimetz).date.year ; i++ ) {
         if ( (i % 4 == 0 && i % o_suta != 0) || i % patru_sute == 0)
             sol += secunde_in_an_bisect;
         else
             sol += secunde_in_an_nebisect;
     }
-
+    // Verificam daca anul curent este bisect sau nu
     unsigned int nr_zile_luni[doisprezece] = {treizeci_unu, douazeci_si_opt, treizeci_unu,
     treizeci, treizeci_unu, treizeci, treizeci_unu, treizeci_unu, treizeci, treizeci_unu, treizeci, treizeci_unu};
     unsigned int an_curent = (datetimetz).date.year;
     if ( (an_curent % 4 == 0 && an_curent % o_suta != 0) || an_curent % patru_sute == 0)
         nr_zile_luni[1] = douazeci_si_opt + 1;
 
+    // Adaugam numarul de secunde din lunile trecute
     for ( int i = 0 ; i < (datetimetz).date.month - 1 ; i++ )
         sol += nr_zile_luni[i] * ore_in_zi * sec_in_ora;
 
+    // Adaugam numarul de secunde din zilele trecute
+    // Din luna curenta
     sol += ((datetimetz).date.day - 1) * ore_in_zi * sec_in_ora;
 
+    // Scadem diferenta de ore dintre fusul orar si UTC
     sol -= ((int)(datetimetz).tz->utc_hour_difference) * sec_in_ora;
 
     return sol;
